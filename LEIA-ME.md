@@ -8,7 +8,7 @@ O usuário padrão é `admin`. A senha você define no instalador (`install.php`
 
 ## Deploy automático (GitHub → Hostinger)
 
-Cada envio para a branch `main` dispara o GitHub Actions, que sobe os arquivos para `public_html/painel/` por FTP.
+Cada envio para a branch `main` dispara o GitHub Actions, que sobe os arquivos para a pasta `painel/` do site (dentro de `public_html`) por FTP.
 Cadastre em *Settings → Secrets and variables → Actions*: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`.
 Arquivos gerados no servidor (`includes/config.php` e `includes/install.lock`) não fazem parte do repositório e não são apagados pelo deploy.
 
