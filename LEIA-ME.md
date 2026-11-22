@@ -12,18 +12,12 @@ Cada envio para a branch `main` dispara o GitHub Actions, que sobe os arquivos p
 Cadastre em *Settings → Secrets and variables → Actions*: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`.
 Arquivos gerados no servidor (`includes/config.php` e `includes/install.lock`) não fazem parte do repositório e não são apagados pelo deploy.
 
----|---|
-| Usuário | `admin` |
-| Senha inicial | `1QGafWIe02GI1E` |
-
-A senha já vem preenchida no instalador, e você pode trocá-la lá mesmo. No primeiro login, o sistema **obriga a definir uma nova senha**. Não deixe este arquivo no servidor.
-
 ---
 
 ## 1. Subir os arquivos
 
 1. No hPanel, abra **Arquivos → Gerenciador de Arquivos** → pasta `public_html`.
-2. Envie o arquivo `disparador-whatsapp.zip` e use a opção **Extrair**. Isso cria a pasta `painel`.
+2. Com o deploy automático configurado, os arquivos chegam sozinhos em `public_html/painel`. Se for subir manualmente, envie o `.zip` e use a opção **Extrair**.
 3. O sistema ficará em `https://seudominio.com.br/painel/`.
    - Para usar um subdomínio (ex.: `painel.seudominio.com.br`), crie-o em **Domínios → Subdomínios** e extraia o conteúdo da pasta `painel` dentro da pasta dele.
 4. Confirme que o **SSL (HTTPS)** está ativo no domínio (hPanel → Segurança → SSL). A Meta exige HTTPS.
