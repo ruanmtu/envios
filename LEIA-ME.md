@@ -8,7 +8,7 @@ O usuário padrão é `admin`. A senha você define no instalador (`install.php`
 
 ## Deploy automático (GitHub → Hostinger)
 
-Cada envio para a branch `main` dispara o GitHub Actions, que sobe os arquivos para a pasta `painel/` do site (dentro de `public_html`) por FTP.
+Cada envio para a branch `main` dispara o GitHub Actions, que sobe os arquivos direto para a raiz do site (`public_html`) por FTP.
 Cadastre em *Settings → Secrets and variables → Actions*: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`.
 Arquivos gerados no servidor (`includes/config.php` e `includes/install.lock`) não fazem parte do repositório e não são apagados pelo deploy.
 
@@ -17,8 +17,8 @@ Arquivos gerados no servidor (`includes/config.php` e `includes/install.lock`) n
 ## 1. Subir os arquivos
 
 1. No hPanel, abra **Arquivos → Gerenciador de Arquivos** → pasta `public_html`.
-2. Com o deploy automático configurado, os arquivos chegam sozinhos em `public_html/painel`. Se for subir manualmente, envie o `.zip` e use a opção **Extrair**.
-3. O sistema ficará em `https://seudominio.com.br/painel/`.
+2. Com o deploy automático configurado, os arquivos chegam sozinhos em `public_html`. Se for subir manualmente, envie o `.zip` e use a opção **Extrair**.
+3. O sistema ficará em `https://seudominio.com.br/`.
    - Para usar um subdomínio (ex.: `painel.seudominio.com.br`), crie-o em **Domínios → Subdomínios** e extraia o conteúdo da pasta `painel` dentro da pasta dele.
 4. Confirme que o **SSL (HTTPS)** está ativo no domínio (hPanel → Segurança → SSL). A Meta exige HTTPS.
 5. Em **Avançado → Configuração do PHP**, use **PHP 8.1 ou superior** (recomendado 8.2/8.3).
@@ -29,11 +29,11 @@ hPanel → **Bancos de dados → Gerenciamento de bancos MySQL** → crie um ban
 
 ## 3. Rodar o instalador
 
-1. Acesse `https://seudominio.com.br/painel/install.php`.
+1. Acesse `https://seudominio.com.br/install.php`.
 2. Preencha os dados do banco. Os dados do administrador já vêm preenchidos.
 3. Clique em **Instalar**.
 4. **Exclua o arquivo `install.php`** pelo Gerenciador de Arquivos.
-5. Entre em `https://seudominio.com.br/painel/` e defina sua nova senha.
+5. Entre em `https://seudominio.com.br/` e defina sua nova senha.
 
 ## 4. Conectar com a Meta
 
@@ -54,7 +54,7 @@ No [Meta for Developers](https://developers.facebook.com/apps):
 
 No app da Meta: **WhatsApp → Configuração → Webhook → Editar**:
 
-- **URL de retorno:** `https://seudominio.com.br/painel/webhook.php`
+- **URL de retorno:** `https://seudominio.com.br/webhook.php`
 - **Token de verificação:** está em *Configurações → 2. Webhook* no painel.
 - Clique em **Verificar e salvar**, depois em **Gerenciar** e **assine o campo `messages`**.
 - Coloque o app em modo **Ativo/Publicado** para receber eventos de números reais.
@@ -64,7 +64,7 @@ No app da Meta: **WhatsApp → Configuração → Webhook → Editar**:
 hPanel → **Avançado → Cron Jobs**:
 
 - Tipo: **PHP**
-- Comando: o caminho mostrado em *Configurações → 3. Cron Job*, por exemplo `domains/seudominio.com.br/public_html/painel/cron/enviar.php`
+- Comando: o caminho mostrado em *Configurações → 3. Cron Job*, por exemplo `domains/seudominio.com.br/public_html/cron/enviar.php`
 - Frequência: **A cada minuto** (`* * * * *`)
 
 Sem o cron, as campanhas ficam paradas na fila. O painel avisa quando ele não roda há mais de 5 minutos.

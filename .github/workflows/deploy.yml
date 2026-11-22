@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftp
-          server-dir: painel/
+          server-dir: ./
           exclude: |
             **/.git*
             **/.git*/**
