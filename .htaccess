@@ -1,0 +1,19 @@
+# Disparador WhatsApp
+Options -Indexes
+DirectoryIndex index.php
+
+# Bloqueia arquivos sensíveis
+<FilesMatch "(\.(sql|md|lock|log|ini)|^\.)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Força HTTPS (descomente depois de ativar o SSL do domínio)
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
