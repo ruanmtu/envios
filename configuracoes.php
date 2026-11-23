@@ -105,7 +105,7 @@ page_header('Configurações', 'configuracoes');
 <h1>Configurações</h1>
 
 <div class="card">
-  <h2>1. Conexão com a API do WhatsApp (Meta)</h2>
+  <div class="section-title"><span class="num">1</span><h2>Conexão com a API do WhatsApp (Meta)</h2></div>
   <p class="small muted">Os dados ficam em <a href="https://developers.facebook.com/apps" target="_blank" rel="noopener">developers.facebook.com</a> → seu app → WhatsApp → <strong>Configuração da API</strong>.
     Use um <strong>token permanente</strong> de Usuário do Sistema (Configurações do Negócio → Usuários do sistema), com as permissões
     <code>whatsapp_business_messaging</code> e <code>whatsapp_business_management</code>. O token temporário expira em 24h.</p>
@@ -136,7 +136,7 @@ page_header('Configurações', 'configuracoes');
 </div>
 
 <div class="card" id="webhook">
-  <h2>2. Webhook (status de entrega e respostas)</h2>
+  <div class="section-title"><span class="num">2</span><h2>Webhook (status de entrega e respostas)</h2></div>
   <p class="small muted">No app da Meta: WhatsApp → <strong>Configuração</strong> → Webhook → Editar. Cole os dados abaixo, clique em "Verificar e salvar" e depois <strong>assine o campo <code>messages</code></strong>.</p>
   <dl class="kv">
     <dt>URL de retorno</dt><dd><code><?= e($webhookUrl) ?></code></dd>
@@ -148,7 +148,7 @@ page_header('Configurações', 'configuracoes');
 </div>
 
 <div class="card" id="cron">
-  <h2>3. Cron Job (envio automático)</h2>
+  <div class="section-title"><span class="num">3</span><h2>Cron Job (envio automático)</h2></div>
   <p class="small">Na Hostinger: <strong>hPanel → Avançado → Cron Jobs</strong> → tipo <strong>PHP</strong> → no campo do comando, informe o caminho abaixo → frequência <strong>a cada minuto</strong> (* * * * *).</p>
   <dl class="kv">
     <dt>Caminho do script</dt><dd><code><?= e($cronPath) ?></code></dd>
@@ -161,7 +161,7 @@ page_header('Configurações', 'configuracoes');
 </div>
 
 <div class="card">
-  <h2>4. Regras de envio</h2>
+  <div class="section-title"><span class="num">4</span><h2>Regras de envio</h2></div>
   <form method="post">
     <?= csrf_field() ?><input type="hidden" name="op" value="envio">
     <div class="row">
@@ -181,7 +181,7 @@ page_header('Configurações', 'configuracoes');
 </div>
 
 <div class="card">
-  <h2>5. Teste rápido</h2>
+  <div class="section-title"><span class="num">5</span><h2>Teste rápido</h2></div>
   <p class="small muted">Envia o template padrão <code>hello_world</code> da Meta. Com o número de teste da Meta, o destino precisa estar cadastrado na lista de destinatários do app.</p>
   <form method="post" class="toolbar">
     <?= csrf_field() ?><input type="hidden" name="op" value="teste_hello">

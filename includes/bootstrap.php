@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 define('APP_ROOT', dirname(__DIR__));
 define('APP_NAME', 'Disparador WhatsApp');
-define('APP_VERSION', '1.0.0');
+define('APP_VERSION', '1.1.0');
 
 ini_set('display_errors', '0');
 error_reporting(E_ALL);
