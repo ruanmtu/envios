@@ -72,6 +72,12 @@ foreach (($payload['entry'] ?? []) as $entry) {
                 }
             }
             q('UPDATE conversas SET status = ? WHERE wamid = ?', [$novo, $wamid]);
+            if ($novo === 'falhou') {
+                $err = $s['errors'][0] ?? [];
+                $code = (string)($err['code'] ?? '');
+                $det = (string)($err['error_data']['details'] ?? ($err['message'] ?? ($err['title'] ?? '')));
+                log_event('erro', 'Mensagem não entregue para ' . format_phone((string)($s['recipient_id'] ?? '')) . " — código $code: " . explain_meta_error($code, $det), ['wamid' => $wamid]);
+            }
         }
 
         // ----- Mensagens recebidas -----

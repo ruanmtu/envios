@@ -86,9 +86,16 @@ if (is_post()) {
             redirect('configuracoes.php');
         }
         $r = WhatsApp::fromSettings()->sendTemplate($tel, 'hello_world', 'en_US');
-        $r['ok']
-            ? flash('sucesso', 'Template hello_world enviado para ' . format_phone($tel) . '.')
-            : flash('erro', 'Falha (código ' . $r['error']['code'] . '): ' . $r['error']['message']);
+        if ($r['ok']) {
+            $wamid = $r['data']['messages'][0]['id'] ?? null;
+            $waId = (string)($r['data']['contacts'][0]['wa_id'] ?? '');
+            q('INSERT IGNORE INTO conversas (contato_id, telefone, direcao, tipo, texto, wamid, status, lida, usuario_id, criado_em)
+               VALUES (NULL, ?, ?, ?, ?, ?, ?, 1, ?, NOW())', [$tel, 'saida', 'template', '[Teste] hello_world', $wamid, 'enviada', $user['id']]);
+            log_event('info', 'Teste hello_world aceito pela Meta para ' . format_phone($tel) . ($waId !== '' && $waId !== $tel ? " (WhatsApp ID: $waId)" : ''), ['wamid' => $wamid]);
+            flash('sucesso', 'A Meta aceitou o hello_world para ' . format_phone($tel) . ".\nSe não chegar em 1 minuto, veja o motivo em Logs (precisa do webhook configurado).");
+        } else {
+            flash('erro', 'Falha (código ' . $r['error']['code'] . '): ' . $r['error']['message']);
+        }
         redirect('configuracoes.php');
     }
 }

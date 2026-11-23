@@ -273,3 +273,22 @@ function tier_to_number(string $tier): ?int
         'TIER_100K' => 100000, 'TIER_UNLIMITED' => 0, 'UNLIMITED' => 0,
     ][strtoupper($tier)] ?? null;
 }
+
+/** Explica em português os erros mais comuns da Meta. */
+function explain_meta_error(string $code, string $detalhe = ''): string
+{
+    $map = [
+        '131030' => 'o número não está na lista de destinatários permitidos do número de teste (adicione e confirme em developers.facebook.com → WhatsApp → Configuração da API).',
+        '131026' => 'mensagem não entregue: o número não tem WhatsApp, está com app desatualizado ou não aceitou os novos Termos.',
+        '131047' => 'fora da janela de 24h: só é possível enviar template.',
+        '131049' => 'a Meta limitou mensagens de marketing para este contato (proteção de experiência do usuário).',
+        '131050' => 'o contato optou por não receber mensagens de marketing.',
+        '131042' => 'problema de pagamento na conta do WhatsApp Business.',
+        '131031' => 'a conta do WhatsApp Business está bloqueada.',
+        '132001' => 'o template não existe nesse idioma ou ainda não foi aprovado.',
+        '130472' => 'o número do contato faz parte de um experimento da Meta e não recebeu a mensagem de marketing.',
+        '131056' => 'muitas mensagens para o mesmo contato em pouco tempo.',
+    ];
+    $txt = $map[$code] ?? 'falha na entrega.';
+    return $detalhe !== '' ? $txt . ' Detalhe da Meta: ' . $detalhe : $txt;
+}
